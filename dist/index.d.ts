@@ -1,0 +1,12 @@
+declare function formatDate(date: string, dateSeparator?: string): string;
+declare function verifyRealNumbers(str: string): boolean;
+declare function deepClone(obj: object): object;
+declare function supplement(num: string, len: number): string;
+declare function getBrowserKernel(): string;
+declare function generateUUID(): string;
+declare function getUrlKey(name: string): any;
+declare function thousandCharacter(value: string): string;
+declare function dataToTimestamp(date: string): number;
+declare function isLeapYear(Year: number): boolean;
+declare function isArrayFn(o: any): boolean;
+export { generateUUID, getBrowserKernel, supplement, deepClone, formatDate, verifyRealNumbers, getUrlKey, thousandCharacter, dataToTimestamp, isLeapYear, isArrayFn };
