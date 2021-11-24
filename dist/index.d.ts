@@ -9,4 +9,5 @@ declare function thousandCharacter(value: string): string;
 declare function dataToTimestamp(date: string): number;
 declare function isLeapYear(Year: number): boolean;
 declare function isArrayFn(o: any): boolean;
-export { generateUUID, getBrowserKernel, supplement, deepClone, formatDate, verifyRealNumbers, getUrlKey, thousandCharacter, dataToTimestamp, isLeapYear, isArrayFn };
+declare function getStyle(element: any): object;
+export { generateUUID, getBrowserKernel, supplement, deepClone, formatDate, verifyRealNumbers, getUrlKey, thousandCharacter, dataToTimestamp, isLeapYear, isArrayFn, getStyle };

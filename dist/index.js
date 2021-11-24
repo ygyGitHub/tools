@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isArrayFn = exports.isLeapYear = exports.dataToTimestamp = exports.thousandCharacter = exports.getUrlKey = exports.verifyRealNumbers = exports.formatDate = exports.deepClone = exports.supplement = exports.getBrowserKernel = exports.generateUUID = void 0;
+exports.getStyle = exports.isArrayFn = exports.isLeapYear = exports.dataToTimestamp = exports.thousandCharacter = exports.getUrlKey = exports.verifyRealNumbers = exports.formatDate = exports.deepClone = exports.supplement = exports.getBrowserKernel = exports.generateUUID = void 0;
 /*
  * @Author GyYu
  * @Description //TODO 日期格式化
@@ -183,3 +183,20 @@ function isArrayFn(o) {
     return Object.prototype.toString.call(o) === '[object Array]';
 }
 exports.isArrayFn = isArrayFn;
+/*
+ * @Author GyYu
+ * @Description 获取元素中所有的样式属性，包含通过class设置的
+ * @Date 2021-11-24 5:22:34 ?F10: PM?
+ * @Param
+ * @return
+ */
+function getStyle(element) {
+    if (element.currentStyle) {
+        return element.currentStyle;
+    }
+    else {
+        return document.defaultView.getComputedStyle(element, null);
+    }
+    return {};
+}
+exports.getStyle = getStyle;

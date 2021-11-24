@@ -221,5 +221,21 @@ o：待验证内容
 
 true/false
 
+## getStyle
 
+获取元素中所有的样式属性，包含通过class设置的
+
+### call
+
+```javascript
+getStyle(element)
+```
+
+### Param
+
+element：元素
+
+### return
+
+对象
 

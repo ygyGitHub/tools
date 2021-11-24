@@ -166,9 +166,24 @@ function isLeapYear(Year:number):boolean{
 function isArrayFn(o:any):boolean{
 	return Object.prototype.toString.call(o) === '[object Array]';
 }
+/*
+ * @Author GyYu
+ * @Description 获取元素中所有的样式属性，包含通过class设置的
+ * @Date 2021-11-24 5:22:34 ?F10: PM?
+ * @Param 
+ * @return 
+ */
+function getStyle(element):object{
+	if(element.currentStyle){
+		return element.currentStyle
+	}else{
+		return document.defaultView.getComputedStyle(element,null)
+	}
+	return {}
+}
 export {
 	generateUUID, getBrowserKernel, supplement, 
 	deepClone, formatDate, verifyRealNumbers,
 	getUrlKey,thousandCharacter,dataToTimestamp,
-	isLeapYear,isArrayFn
+	isLeapYear,isArrayFn,getStyle
 	};
