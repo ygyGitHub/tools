@@ -355,9 +355,9 @@ function downLoad(url: string, type: string = 'GET', params?: object) {
  * @Param
  * @return
  */
-const isMobileUserAgent = () => {
+/* const isMobileUserAgent = () => {
 	return /iphone|ipod|android.*mobile|windows.*phone|blackberry.*mobile/i.test(window.navigator.userAgent.toLowerCase());
-};
+}; */
 /*
  * @Author GyYu
  * @Description 判断是否苹果移动设备访问
@@ -365,9 +365,9 @@ const isMobileUserAgent = () => {
  * @Param
  * @return
  */
-const isAppleMobileDevice = () => {
+/* const isAppleMobileDevice = () => {
 	return /iphone|ipod|ipad|Macintosh/i.test(navigator.userAgent.toLowerCase());
-};
+}; */
 /*
  * @Author GyYu
  * @Description 判断是否安卓移动设备访问
@@ -375,9 +375,9 @@ const isAppleMobileDevice = () => {
  * @Param
  * @return
  */
-const isAndroidMobileDevice = () => {
+/* const isAndroidMobileDevice = () => {
 	return /android/i.test(navigator.userAgent.toLowerCase());
-};
+}; */
 /*
  * @Author GyYu
  * @Description 一个中文俩字符
@@ -385,7 +385,7 @@ const isAndroidMobileDevice = () => {
  * @Param
  * @return
  */
-const chineseLength = str => {
+const chineseLength = (str) => {
 	return str.replace(/[^\x00-\xff]/g, '**').length;
 };
 export {
@@ -409,8 +409,8 @@ export {
 	toCamelCase,
 	fromCamelCase,
 	downLoad,
-	isMobileUserAgent,
+/* 	isMobileUserAgent,
 	isAppleMobileDevice,
-	isAndroidMobileDevice,
+	isAndroidMobileDevice, */
 	chineseLength
 };

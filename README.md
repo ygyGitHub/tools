@@ -239,3 +239,172 @@ element：元素
 
 对象
 
+## trim
+
+获取元素中所有的样式属性，包含通过class设置的
+
+### call
+
+```javascript
+trim(str)
+```
+
+### Param
+
+str：待处理元素
+
+### return
+
+处理后内容
+
+## htmlEncode
+
+转义html标签
+
+### call
+
+```javascript
+htmlEncode(text)
+```
+
+### Param
+
+text：待处理内容
+
+### return
+
+处理后内容
+
+## htmlDecode
+
+还原html标签
+
+### call
+
+```javascript
+htmlDecode(text)
+```
+
+### Param
+
+text：待处理内容
+
+### return
+
+处理后内容
+
+## debounce
+
+ 防抖函数--在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时
+
+### call
+
+```javascript
+debounce(function(){},delay)
+```
+
+### Param
+
+delay：延迟执行时间
+
+## toCamelCase
+
+连字符转驼峰
+
+### call
+
+```javascript
+toCamelCase(str,separator)
+```
+
+### Param
+
+str：待处理内容,
+
+separator:连接符
+
+### return
+
+驼峰
+
+## fromCamelCase
+
+连字符驼峰转连字符驼峰
+
+### call
+
+```javascript
+toCamelCase(str,separator)
+```
+
+### Param
+
+str：待处理内容,
+
+separator:连接符
+
+### return
+
+连字符
+
+## downLoad
+
+表单提交方式下载文件
+
+### call
+
+```javascript
+downLoad(url,type,params)
+```
+
+### Param
+
+url：请求地址,
+
+type:GET/POST,
+
+params:参数对象
+
+### return
+
+无
+
+## downLoad
+
+表单提交方式下载文件
+
+### call
+
+```javascript
+downLoad(url,type,params)
+```
+
+### Param
+
+url：请求地址,
+
+type:GET/POST,
+
+params:参数对象
+
+### return
+
+无
+
+## chineseLength
+
+计算字符串长度，中文俩字符长度
+
+### call
+
+```javascript
+chineseLength(str)
+```
+
+### Param
+
+str：字符串,
+
+### return
+
+字符串长度
