@@ -408,3 +408,123 @@ str：字符串,
 ### return
 
 字符串长度
+
+## stringPrototype
+
+string原型链挂载
+
+### call
+
+```javascript
+stringPrototype(str)// 在页面初始化位置，先执行一下方法，将下面方法挂载到string原型链上
+```
+
+```javascript
+/*
+	 * @Description 字符串内容中全部替换
+	 * @Param
+	 * @use str.replaceAll('参数1','参数2')
+	 * s1 待替换内容  s2 替换内容
+	 * @return
+	 * 替换后的字符串
+	 */
+1、String.prototype.ReplaceAll;//字符串内容中全部替换
+	/*
+	 * @Description 获取字符串长度，中文2个字符
+	 * @use str.ChineseLength()
+	 * @return 字符串长度，中文2个字符
+	 */
+2、String.prototype.ChineseLength;//获取字符串长度，中文2个字符
+	/*
+	 * @Author GyYu
+	 * @Description 去掉字符串中空格
+	 * @use str.Trim()
+	 * @return 替换空格后的内容
+	 */
+3、String.prototype.Trim;//去掉字符串中空格
+	/*
+	 * @Author GyYu
+	 * @Description 忽略大小写比较字符串是否相等
+	 * @use str.IgnoreCaseEquals(str1)
+	 * @return true/false
+	 */
+4、String.prototype.IgnoreCaseEquals;//忽略大小写比较字符串是否相等
+	/*
+	 * @Author GyYu
+	 * @Description 不忽略大小写比较字符串是否相等
+	 * @use str.Equals(str1)
+	 * @return true/false
+	 */
+5、String.prototype.Equals;//不忽略大小写比较字符串是否相等
+	/*
+	 * @Author GyYu
+	 * @Description  检查是否以特定的字符串开始
+	 * @use str.startsWith(str1)
+	 * @return true/false
+	 */
+6、String.prototype.startsWith;//检查是否以特定的字符串开始
+	/*
+	 * @Author GyYu
+	 * @Description  检查是否以特定的字符串结束
+	 * @use str.endsWith(str1)
+	 * @return true/false
+	 */
+7、String.prototype.endsWith;//检查是否以特定的字符串结束
+	/*
+	 * @Author GyYu
+	 * @Description  统计指定字符出现的次数
+	 * @use str.Occurs(str1)
+	 * @return number
+	 */
+8、String.prototype.Occurs;//统计指定字符出现的次数
+	/*
+	 * @Author GyYu
+	 * @Description 反转字符串
+	 * @use str.Reversal()
+	 * @return 反转字符串
+	 */
+9、String.prototype.Reversal;//字符串反转
+	/*
+	 * @Author GyYu
+	 * @Description  字符串占位符替换
+	 * @use
+	 * let a = "今天的天气很{0},大家一起去{1}！{2}"；
+	 * (a as any).Assembly("晴朗","郊游","去不去？")
+	 * @return 今天的天气很晴朗,大家一起去郊游！去不去？
+	 */
+10、String.prototype.Assembly;//字符串反转
+	/*
+	 * @Author GyYu
+	 * @Description 密码安全级别
+	 * @use str.PasswordSecurityLevel()
+	 * @return number 0/1/2/3/4
+	 */
+11、String.prototype.PasswordSecurityLevel
+	/*
+	 * @Author GyYu
+	 * @Description 常用正则表达式验证
+	 * @Param type=number
+	 * 1：手机号码；
+	 * 2：座机；
+	 * 3：邮箱；
+	 * 4：税号；
+	 * 5：身份证号；
+	 * 6：邮政编码；
+	 * 7：网址；
+	 * 8：ip地址；
+	 * 9：匹配是否是实数；
+	 * 10：英文；
+	 * 11：中文；
+	 * 12：非零的正整数；
+	 * 13：非零的负整数；
+	 * 14：正浮点数；
+	 * 15：负浮点数；
+	 * 16：6-18位密码，可带“_”；
+	 * @use str.RegularVerification(1)
+	 * @return
+	 * true/false
+	 */
+12、String.prototype.RegularVerification
+
+```
+

@@ -1,6 +1,8 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.chineseLength = exports.downLoad = exports.fromCamelCase = exports.toCamelCase = exports.debounce = exports.htmlDecode = exports.htmlEncode = exports.trim = exports.getStyle = exports.isArrayFn = exports.isLeapYear = exports.dataToTimestamp = exports.thousandCharacter = exports.getUrlKey = exports.verifyRealNumbers = exports.formatDate = exports.deepClone = exports.supplement = exports.getQueryString = exports.getBrowserKernel = exports.generateUUID = void 0;
+exports.__esModule = true;
+exports.stringPrototype = exports.getPosition = exports.removeClass = exports.addClass = exports.hasClass = exports.chineseLength = exports.downLoad = exports.fromCamelCase = exports.toCamelCase = exports.debounce = exports.htmlDecode = exports.htmlEncode = exports.trim = exports.getStyle = exports.isArrayFn = exports.isLeapYear = exports.dataToTimestamp = exports.thousandCharacter = exports.getUrlKey = exports.verifyRealNumbers = exports.formatDate = exports.deepClone = exports.supplement = exports.getBrowserKernel = exports.generateUUID = void 0;
+var stringPrototype_1 = require("./stringPrototype");
+exports.stringPrototype = stringPrototype_1.stringPrototype;
 /*
  * @Author GyYu
  * @Description //TODO 日期格式化
@@ -34,7 +36,7 @@ exports.formatDate = formatDate;
  * @return
  **/
 function verifyRealNumbers(str) {
-    var Sreg = /^(?:0|\-?(?:0\.\d*[0-9]|[0-9]\d*(?:\.\d*[0-9])?))$/; //验证是不是实数 不是，原内容直接返回
+    var Sreg = /^(?:0|\-?(?:0\.\d*[0-9]|[0-9]\d*(?:\.\d*[0-9])?))$/; //验证是不是实数
     if (Sreg.test(str)) {
         return true;
     }
@@ -50,7 +52,7 @@ function deepClone(obj, newObj) {
     var newObj = newObj || {};
     for (var key in obj) {
         if (typeof obj[key] == 'object') {
-            newObj[key] = (obj[key].constructor === Array) ? [] : {};
+            newObj[key] = obj[key].constructor === Array ? [] : {};
             deepClone(obj[key], newObj[key]);
         }
         else {
@@ -104,22 +106,6 @@ function getBrowserKernel() {
     return '';
 }
 exports.getBrowserKernel = getBrowserKernel;
-/*
- * @Author GyYu
- * @Description 获取地址栏参数
- * @Date 2021-12-1 10:40:02 ?F10: AM?
- * name：key名称
- * @Param
- * @return
- */
-function getQueryString() {
-    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null)
-        return decodeURIComponent(r[2]);
-    return null;
-}
-exports.getQueryString = getQueryString;
 /*
  * @Author GyYu
  * @Description 获取uuid(多组随机数思想)
@@ -256,12 +242,27 @@ function pageingData(allData, pageSize) {
  * @Date 2021-12-1 8:40:52 ?F10: AM?
  * @Param
  * str 待处理字符串
+ * type
+ * 1 全部替换
+ * 2 前后替换
+ * 3 前替换
+ * 4 后替换
  * @return
  */
-function trim(str) {
-    console.log(str);
-    var reExtraSpace = /\s+/g;
-    return str.replace(reExtraSpace, '');
+function trim(str, type) {
+    if (type === void 0) { type = 1; }
+    switch (type) {
+        case 1:
+            return str.replace(/\s+/g, ''); // 全部替换
+        case 2:
+            return str.replace(/(^\s*)|(\s*$)/g, ''); // 前后
+        case 3:
+            return str.replace(/(^\s*)/g, ''); // 前
+        case 4:
+            return str.replace(/(\s*$)/g, ''); // 后
+        default:
+            return str;
+    }
 }
 exports.trim = trim;
 /*
@@ -386,36 +387,6 @@ function downLoad(url, type, params) {
 exports.downLoad = downLoad;
 /*
  * @Author GyYu
- * @Description 判断是否移动设备访问
- * @Date 2021-12-1 11:18:26 ?F10: AM?
- * @Param
- * @return
- */
-/* const isMobileUserAgent = () => {
-    return /iphone|ipod|android.*mobile|windows.*phone|blackberry.*mobile/i.test(window.navigator.userAgent.toLowerCase());
-}; */
-/*
- * @Author GyYu
- * @Description 判断是否苹果移动设备访问
- * @Date 2021-12-1 11:18:26 ?F10: AM?
- * @Param
- * @return
- */
-/* const isAppleMobileDevice = () => {
-    return /iphone|ipod|ipad|Macintosh/i.test(navigator.userAgent.toLowerCase());
-}; */
-/*
- * @Author GyYu
- * @Description 判断是否安卓移动设备访问
- * @Date 2021-12-1 11:18:26 ?F10: AM?
- * @Param
- * @return
- */
-/* const isAndroidMobileDevice = () => {
-    return /android/i.test(navigator.userAgent.toLowerCase());
-}; */
-/*
- * @Author GyYu
  * @Description 一个中文俩字符
  * @Date 2021-12-1 11:37:59 ?F10: AM?
  * @Param
@@ -425,3 +396,78 @@ var chineseLength = function (str) {
     return str.replace(/[^\x00-\xff]/g, '**').length;
 };
 exports.chineseLength = chineseLength;
+/*
+ * @Author GyYu
+ * @Description 是否有
+ * @Date 2021-12-1 3:09:03 ?F10: PM?
+ * @Param
+ * ele：页面标签
+ * cls：类名
+ * @return
+ */
+var hasClass = function (ele, cls) {
+    if (!ele || !cls)
+        return false;
+    if (ele.classList) {
+        return ele.classList.contains(cls);
+    }
+    else {
+        return ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+    }
+};
+exports.hasClass = hasClass;
+/*
+ * @Author GyYu
+ * @Description 增加类名
+ * @Date 2021-12-1 3:11:54 ?F10: PM?
+ * @Param
+ * ele：页面标签
+ * cls：类名
+ * @return
+ */
+var addClass = function (ele, cls) {
+    if (ele.classList) {
+        ele.classList.add(cls);
+    }
+    else {
+        if (!hasClass(ele, cls))
+            ele.className += '' + cls;
+    }
+};
+exports.addClass = addClass;
+/*
+ * @Author GyYu
+ * @Description 移除类名
+ * @Date 2021-12-1 3:14:59 ?F10: PM?
+ * @Param
+ * ele：页面标签
+ * cls：类名
+ * @return
+ */
+var removeClass = function (ele, cls) {
+    if (ele.classList) {
+        ele.classList.remove(cls);
+    }
+    else {
+        ele.className = ele.className.replace(new RegExp('(^|\\b)' + ele.className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+    }
+};
+exports.removeClass = removeClass;
+/*
+ * @Author GyYu
+ * @Description 获取元素相对于浏览器窗口的位置
+ * @Date 2021-12-1 3:20:06 ?F10: PM?
+ * @Param element 页面元素
+ * @return {x，y}
+ */
+var getPosition = function (element) {
+    var offsety = 0;
+    offsety += element.offsetTop;
+    var offsetx = 0;
+    offsetx += element.offsetLeft;
+    if (element.offsetParent != null) {
+        getPosition(element.offsetParent);
+    }
+    return { Left: offsetx, Top: offsety };
+};
+exports.getPosition = getPosition;

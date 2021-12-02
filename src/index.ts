@@ -1,3 +1,4 @@
+import {stringPrototype} from './stringPrototype'
 /*
  * @Author GyYu
  * @Description //TODO 日期格式化
@@ -29,7 +30,7 @@ function formatDate(date: string, dateSeparator: string = '-'): string {
  * @return
  **/
 function verifyRealNumbers(str: string): boolean {
-	let Sreg = /^(?:0|\-?(?:0\.\d*[0-9]|[0-9]\d*(?:\.\d*[0-9])?))$/; //验证是不是实数 不是，原内容直接返回
+	let Sreg = /^(?:0|\-?(?:0\.\d*[0-9]|[0-9]\d*(?:\.\d*[0-9])?))$/; //验证是不是实数
 	if (Sreg.test(str)) {
 		return true;
 	}
@@ -40,14 +41,14 @@ function verifyRealNumbers(str: string): boolean {
  * @Description 深拷贝
  * @Date 2021-11-23 1:06:23 ?F10: PM?
  */
-function deepClone(obj: object,newObj?:object): object {
+function deepClone(obj: object, newObj?: object): object {
 	var newObj = newObj || {};
-	for(let key in obj){
-		if(typeof obj[key] == 'object'){
-			newObj[key] = (obj[key].constructor === Array)?[]:{}
-			deepClone(obj[key],newObj[key]);
-		}else{
-			newObj[key] = obj[key]
+	for (let key in obj) {
+		if (typeof obj[key] == 'object') {
+			newObj[key] = obj[key].constructor === Array ? [] : {};
+			deepClone(obj[key], newObj[key]);
+		} else {
+			newObj[key] = obj[key];
 		}
 	}
 	return newObj;
@@ -90,20 +91,6 @@ function getBrowserKernel(): string {
 		return 'Safari';
 	}
 	return '';
-}
-/*
- * @Author GyYu
- * @Description 获取地址栏参数
- * @Date 2021-12-1 10:40:02 ?F10: AM?
- * name：key名称
- * @Param
- * @return
- */
-function getQueryString(): any {
-	let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
-	let r = window.location.search.substr(1).match(reg);
-	if (r != null) return decodeURIComponent(r[2]);
-	return null;
 }
 /*
  * @Author GyYu
@@ -232,12 +219,26 @@ function pageingData(allData: any, pageSize: number = 10): any {
  * @Date 2021-12-1 8:40:52 ?F10: AM?
  * @Param
  * str 待处理字符串
+ * type
+ * 1 全部替换
+ * 2 前后替换
+ * 3 前替换
+ * 4 后替换
  * @return
  */
-function trim(str: string): string {
-	console.log(str);
-	let reExtraSpace = /\s+/g;
-	return str.replace(reExtraSpace, '');
+function trim(str: string,type:number=1): string {
+	switch (type) {
+		case 1:
+			return str.replace(/\s+/g, ''); // 全部替换
+		case 2:
+			return str.replace(/(^\s*)|(\s*$)/g, ''); // 前后
+		case 3:
+			return str.replace(/(^\s*)/g, ''); // 前
+		case 4:
+			return str.replace(/(\s*$)/g, ''); // 后
+		default:
+			return str;
+	}
 }
 /*
  * @Author GyYu
@@ -350,48 +351,85 @@ function downLoad(url: string, type: string = 'GET', params?: object) {
 }
 /*
  * @Author GyYu
- * @Description 判断是否移动设备访问
- * @Date 2021-12-1 11:18:26 ?F10: AM?
- * @Param
- * @return
- */
-/* const isMobileUserAgent = () => {
-	return /iphone|ipod|android.*mobile|windows.*phone|blackberry.*mobile/i.test(window.navigator.userAgent.toLowerCase());
-}; */
-/*
- * @Author GyYu
- * @Description 判断是否苹果移动设备访问
- * @Date 2021-12-1 11:18:26 ?F10: AM?
- * @Param
- * @return
- */
-/* const isAppleMobileDevice = () => {
-	return /iphone|ipod|ipad|Macintosh/i.test(navigator.userAgent.toLowerCase());
-}; */
-/*
- * @Author GyYu
- * @Description 判断是否安卓移动设备访问
- * @Date 2021-12-1 11:18:26 ?F10: AM?
- * @Param
- * @return
- */
-/* const isAndroidMobileDevice = () => {
-	return /android/i.test(navigator.userAgent.toLowerCase());
-}; */
-/*
- * @Author GyYu
  * @Description 一个中文俩字符
  * @Date 2021-12-1 11:37:59 ?F10: AM?
  * @Param
  * @return
  */
-const chineseLength = (str) => {
+
+const chineseLength = str => {
 	return str.replace(/[^\x00-\xff]/g, '**').length;
+};
+/*
+ * @Author GyYu
+ * @Description 是否有
+ * @Date 2021-12-1 3:09:03 ?F10: PM?
+ * @Param
+ * ele：页面标签
+ * cls：类名
+ * @return
+ */
+
+const hasClass = (ele, cls) => {
+	if (!ele || !cls) return false;
+	if (ele.classList) {
+		return ele.classList.contains(cls);
+	} else {
+		return ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+	}
+};
+/*
+ * @Author GyYu
+ * @Description 增加类名
+ * @Date 2021-12-1 3:11:54 ?F10: PM?
+ * @Param
+ * ele：页面标签
+ * cls：类名
+ * @return
+ */
+const addClass = (ele, cls) => {
+	if (ele.classList) {
+		ele.classList.add(cls);
+	} else {
+		if (!hasClass(ele, cls)) ele.className += '' + cls;
+	}
+};
+/*
+ * @Author GyYu
+ * @Description 移除类名
+ * @Date 2021-12-1 3:14:59 ?F10: PM?
+ * @Param
+ * ele：页面标签
+ * cls：类名
+ * @return
+ */
+const removeClass = (ele, cls) => {
+	if (ele.classList) {
+		ele.classList.remove(cls);
+	} else {
+		ele.className = ele.className.replace(new RegExp('(^|\\b)' + ele.className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+	}
+};
+/*
+ * @Author GyYu
+ * @Description 获取元素相对于浏览器窗口的位置
+ * @Date 2021-12-1 3:20:06 ?F10: PM?
+ * @Param element 页面元素
+ * @return {x，y}
+ */
+const getPosition = element => {
+	let offsety = 0;
+	offsety += element.offsetTop;
+	let offsetx = 0;
+	offsetx += element.offsetLeft;
+	if (element.offsetParent != null) {
+		getPosition(element.offsetParent);
+	}
+	return { Left: offsetx, Top: offsety };
 };
 export {
 	generateUUID,
 	getBrowserKernel,
-	getQueryString,
 	supplement,
 	deepClone,
 	formatDate,
@@ -409,8 +447,10 @@ export {
 	toCamelCase,
 	fromCamelCase,
 	downLoad,
-/* 	isMobileUserAgent,
-	isAppleMobileDevice,
-	isAndroidMobileDevice, */
-	chineseLength
+	chineseLength,
+	hasClass,
+	addClass,
+	removeClass,
+	getPosition,
+	stringPrototype
 };
